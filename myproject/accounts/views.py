@@ -1,9 +1,12 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
+from . import models
 
 @login_required
 def main_page(request):
-    return render(request, 'home.html')
+    albums = models.Album.objects.all()
+    album = get_object_or_404(models.Album)
+    return render(request, 'home.html', {'albums': albums, 'album': album})
 
 @login_required
 def profile(request):
