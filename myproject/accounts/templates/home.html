@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>home</title>
+    <link rel="stylesheet" href="../cssstyles/basicstyle.css">
 </head>
 <body>
     {% for album in albums %}
-        <h1>{{ album.title }}</h1>
+        <h1>{{ album.name }}</h1>
     {% endfor %}
 </body>
 </html>
