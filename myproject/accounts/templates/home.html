@@ -8,6 +8,8 @@
 <body>
     {% for album in albums %}
         <h1>{{ album.name }}</h1>
+        <img class="center" src="{{ album.cover }}" alt="{{ album.name }}" >
+
     {% endfor %}
 </body>
 </html>
