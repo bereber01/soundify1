@@ -4,6 +4,20 @@ from django.contrib.auth.models import AbstractUser
 from . import services
 from django.core.validators import FileExtensionValidator
 
+
+
+class CustomUser(AbstractUser):
+    groups = models.ManyToManyField(
+        'auth.Group',
+        related_name='customuser_set',
+        related_query_name='user'
+    )
+    user_permissions = models.ManyToManyField(
+        'auth.Permission',
+        related_name='customuser_set',
+        related_query_name='user'
+    )
+
 class Genre(models.Model):
     """ Модель жанров треков
     """
@@ -28,28 +42,15 @@ class Album(models.Model):
 
 
 class Track(models.Model):
-    """ Модель треков
-    """
-    #user = models.ForeignKey(AuthUser, on_delete=models.CASCADE, related_name='tracks')
+    id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=100)
-    genre = models.ManyToManyField(Genre, related_name='track_genres')
-    album = models.ForeignKey(Album, on_delete=models.SET_NULL, blank=True, null=True)
-    link_of_author = models.CharField(max_length=500, blank=True, null=True)
-    file = models.FileField(
-         upload_to=services.get_path_upload_track,
-         validators=[FileExtensionValidator(allowed_extensions=['mp3', 'wav'])]
-     )
-    create_at = models.DateTimeField(auto_now_add=True)
-    plays_count = models.PositiveIntegerField(default=0)
-    private = models.BooleanField(default=False)
-    cover = models.ImageField(
-         upload_to=services.get_path_upload_cover_track,
-         blank=True,
-         null=True,
-         validators=[FileExtensionValidator(allowed_extensions=['jpg']), services.validate_size_image]
-     )
+    categorie = models.CharField(max_length=100, null=True, default=None)
+    artist = models.CharField(max_length=100)
+    audio_file = models.FileField(upload_to='audio/')
+    audio_img = models.FileField(upload_to='audio_img/')
 
-
+    def __str__(self):
+        return self.title
 
 class PlayList(models.Model):
     """ Модель плейлистов пользователя

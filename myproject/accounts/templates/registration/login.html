@@ -2,26 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-    <form method="post">
-      {% csrf_token %}
-      <div class="form-group">
-        <label for="username">Nickname</label>
-        <input  name="username" type="text" class="form-control" id="username" aria-describedby="emailHelp" placeholder="Enter your nickname">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <h2 class="mt-4 mb-4">Login</h2>
+        <form method="post" class="mb-4">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+        <p>Don't have an account? <a href="{% url 'register' %}" class="btn btn-link">Register here</a>.</p>
       </div>
-      <div class="form-group">
-        <label for="email">Email address</label>
-        <input name="email"type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
-      </div>
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input name="password" type="password" class="form-control" id="password" placeholder="Password">
-      </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-
-      {{ form.errors }}
-    </form>
+    </div>
+  </div>
 </body>
 </html>

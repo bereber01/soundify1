@@ -3,13 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>home</title>
-    <link rel="stylesheet" href="../cssstyles/basicstyle.css">
 </head>
 <body>
-    {% for album in albums %}
-        <h1>{{ album.name }}</h1>
-        <img class="center" src="{{ album.cover }}" alt="{{ album.name }}" >
-
+    {% for genre in genres %}
+        <h1>{{ genre.name }} for you:</h1>
+        {% for album in albums %}
+            {% if album.genre == genre %}
+                <h1>{{ album.name }}</h1>
+            {% endif %}
+        {% endfor %}
     {% endfor %}
 </body>
 </html>
