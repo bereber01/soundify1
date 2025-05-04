@@ -1,9 +1,9 @@
 from django.urls import path
 from . import views
-from .views import TrackListCreateView, TrackDetailView, UpdateSong, AddSong
+from .views import TrackListCreateView, TrackDetailView, UpdateSong, AddSong, index
 
 urlpatterns = [
-    path('home/', views.main_page, name='main_page'),
+    path('home/', index, name='main_page'),
     path('profile/', views.profile, name='profile'),
     path('register/', views.register, name='register'),
     path('login/', views.user_login, name='login'),

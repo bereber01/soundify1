@@ -57,7 +57,7 @@
         const playlist = document.getElementById('playlist');
 
         function fetchSongs() {
-            fetch('/api/songs/')
+            fetch('/audio/')
                 .then(response => response.json())
                 .then(songs => {
                     songs.forEach(song => {
