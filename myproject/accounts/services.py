@@ -22,7 +22,7 @@ def get_path_upload_cover_playlist(instance, file):
 
 
 def get_path_upload_track(instance, file):
-    """ Построение пути к файлу, format: (media)/track/user_id/audio.pm3
+    """ Построение пути к файлу, format: (media)/track/user_id/audio.mp3
     """
     return f'track/{file}'
 
