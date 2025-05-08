@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
 from . import models
 from rest_framework import generics
-from .models import Track
+from .models import Track, Genre, Album
 from .serializer import TrackSerializer
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
@@ -10,12 +10,12 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from .forms import RegistrationForm, LoginForm
 
-@login_required
-def main_page(request):
-    albums = models.Album.objects.all()
-    genres = models.Genre.objects.all()
-
-    return render(request, 'home.html', {'albums': albums, 'genres': genres})
+# @login_required
+# def main_page(request):
+#     albums = models.Album.objects.all()
+#     genres = models.Genre.objects.all()
+#
+#     return render(request, 'home.html', {'albums': albums, 'genres': genres})
 
 @login_required
 def profile(request):
@@ -60,14 +60,15 @@ def user_login(request):
         form = LoginForm()
     return render(request, 'login.html', {'form': form})
 
-@login_required
 def index(request):
-    return render(request, 'index.html')
+    genres = Genre.objects.all()
+    albums = Album.objects.all()
+    return render(request, 'index.html', {'genres': genres, 'albums': albums})
 
-@login_required
+
 def AddSong(request):
     return render(request, 'AddSong.html')
 
-@login_required
+#@login_required
 def UpdateSong(request, pk):
     return render(request, 'UpdateSong.html')

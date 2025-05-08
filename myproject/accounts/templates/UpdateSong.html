@@ -39,7 +39,7 @@
         // Fetch song data and fill the form fields
         const url = window.location.pathname.split('/');
         let songId = url[2];
-        fetch(`/api/songs/${songId}/`)
+        fetch(`/accounts/songs/${songId}/`)
           .then((response) => response.json())
           .then((data) => {
             document.getElementById('title').value = data.title;
@@ -58,7 +58,7 @@
           const formData = new FormData(this);
 
           // Make API call to update song
-          fetch(`/api/songs/${songId}/`, {
+          fetch(`/accounts/songs/${songId}/`, {
             method: 'PUT',
             headers: {
               'X-CSRFToken': getCookie('csrftoken') // Ensure to include CSRF token

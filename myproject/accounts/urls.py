@@ -3,7 +3,7 @@ from . import views
 from .views import TrackListCreateView, TrackDetailView, UpdateSong, AddSong, index
 
 urlpatterns = [
-    path('', index, name='main_page'),
+    path('', index, name='home'),
     path('profile/', views.profile, name='profile'),
     path('register/', views.register, name='register'),
     path('login/', views.user_login, name='login'),

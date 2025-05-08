@@ -34,7 +34,7 @@ class Track(models.Model):
     title = models.CharField(max_length=100)
     categorie = models.CharField(max_length=100, null=True, default=None)
     artist = models.CharField(max_length=100, null=True, default=None)
-    audio_file = models.FileField(upload_to='audio/')
+    audio_file = models.FileField(upload_to='audio/', null=True, default=None)
     audio_img = models.FileField(upload_to='audio_img/', null=True, default=None)
 
     def __str__(self):
@@ -46,7 +46,7 @@ class Album(models.Model):
     #user = models.ForeignKey(user, on_delete=models.CASCADE, related_name='albums')
     name = models.CharField(max_length=50)
     genre = models.ManyToManyField(Genre, related_name='album_genres')
-    track = models.ManyToManyField(Track, related_name='album_genres')
+    track = models.ManyToManyField(Track, related_name='album_genres', null=True, default=None)
     description = models.TextField(max_length=1000)
     private = models.BooleanField(default=False)
     cover = models.ImageField(
