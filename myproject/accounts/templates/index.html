@@ -8,10 +8,8 @@
 <body>
     {% for genre in genres %}
         <h1>{{ genre.name }} for you:</h1>
-        {% for album in albums %}
-            {% if album.genre == genre %}
-                <h1>{{ album.name }}</h1>
-            {% endif %}
+        {% for album in genre.album_genres.all %}
+            <h1>{{ album.name }}</h1>
         {% endfor %}
     {% endfor %}
 </body>
