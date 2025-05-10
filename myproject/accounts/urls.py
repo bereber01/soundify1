@@ -4,6 +4,7 @@ from .views import TrackListCreateView, TrackDetailView, UpdateSong, AddSong, in
 
 urlpatterns = [
     path('', index, name='home'),
+    path('album/<int:album_id>/', views.album_detail, name='album_detail'),
     path('profile/', views.profile, name='profile'),
     path('register/', views.register, name='register'),
     path('login/', views.user_login, name='login'),

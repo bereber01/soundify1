@@ -72,3 +72,7 @@ def AddSong(request):
 #@login_required
 def UpdateSong(request, pk):
     return render(request, 'UpdateSong.html')
+
+def album_detail(request, album_id):
+    album = get_object_or_404(Album, id=album_id)
+    return render(request, 'album_detail.html', {'album': album})

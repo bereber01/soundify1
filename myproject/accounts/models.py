@@ -46,7 +46,7 @@ class Album(models.Model):
     #user = models.ForeignKey(user, on_delete=models.CASCADE, related_name='albums')
     name = models.CharField(max_length=50)
     genre = models.ManyToManyField(Genre, related_name='album_genres')
-    track = models.ManyToManyField(Track, related_name='album_tracks', null=True, blank=True)
+    track = models.ManyToManyField(Track, related_name='album_tracks', blank=True)
     description = models.TextField(max_length=1000)
     private = models.BooleanField(default=False)
     cover = models.ImageField(
