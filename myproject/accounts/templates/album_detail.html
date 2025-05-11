@@ -5,13 +5,15 @@
     <title>{{ album.name }}</title>
     <style>
         img {
-            width: 200px;
-            height: 200px;
+            width: 400px;
+            height: 400px;
         }
     </style>
 </head>
 <body>
+    <img src="{{ album.cover.url }}" alt="image not found">
     <h1>{{ album.name }}</h1>
+    <p>{{ album.description }}</p>
     {% for track in album.track.all %}
         <h2>{{ track.title }}</h2>
     {% endfor %}
