@@ -12,5 +12,8 @@
 </head>
 <body>
     <h1>{{ album.name }}</h1>
+    {% for track in album.track.all %}
+        <h2>{{ track.title }}</h2>
+    {% endfor %}
 </body>
 </html>
