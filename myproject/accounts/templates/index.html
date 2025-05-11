@@ -4,13 +4,19 @@
     <meta charset="UTF-8">
     <title>home</title>
     <link rel="stylesheet" href="../cssstyles/basicstyle.css">
+    <style>
+        img {
+            width: 200px;
+            height: 200px;
+        }
+    </style>
 </head>
 <body>
     <h1><a href="AddSong"> Add your song</a></h1>
     {% for genre in genres %}
         <h1>{{ genre.name }} for you:</h1>
         {% for album in genre.album_genres.all %}
-            <img src="{{ album.cover }}" alt="image not found">
+            <img src="{{ album.cover.url }}" alt="image not found" style="max-width:100 px">
             <h1><a href="{% url 'album_detail' album.id %}">{{ album.name }}</a></h1>
         {% endfor %}
     {% endfor %}

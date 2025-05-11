@@ -32,10 +32,7 @@ class Genre(models.Model):
 class Track(models.Model):
     id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=100)
-    categorie = models.CharField(max_length=100, null=True, default=None)
-    artist = models.CharField(max_length=100, null=True, default=None)
     audio_file = models.FileField(upload_to='audio/', null=True, default=None)
-    audio_img = models.FileField(upload_to='audio_img/', null=True, default=None)
 
     def __str__(self):
         return self.title
