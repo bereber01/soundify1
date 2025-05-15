@@ -16,6 +16,9 @@
     <p>{{ album.description }}</p>
     {% for track in album.track.all %}
         <h2>{{ track.title }}</h2>
+        <audio controls>
+            <source src="{{ track.audio_file }}" type="audio/mpeg" >
+        </audio>
     {% endfor %}
 </body>
 </html>
