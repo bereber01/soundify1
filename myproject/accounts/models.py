@@ -40,7 +40,7 @@ class Track(models.Model):
 class Album(models.Model):
     """ Модель альбомов для треков
     """
-    #user = models.ForeignKey(user, on_delete=models.CASCADE, related_name='albums')
+    # user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='albums')
     name = models.CharField(max_length=50)
     genre = models.ManyToManyField(Genre, related_name='album_genres')
     track = models.ManyToManyField(Track, related_name='album_tracks', blank=True)

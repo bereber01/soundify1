@@ -15,6 +15,7 @@ urlpatterns = [
     path('songs/&lt;int:pk&gt;/', TrackDetailView.as_view(), name='song-detail'),
     path('UpdateSong/&lt;int:pk&gt;', UpdateSong, name='UpdateSong'),
     path('AddSong', AddSong, name='AddSong'),
+    path('createalbum/', views.create_album, name='create_album')
 ]
 
 if settings.DEBUG:
