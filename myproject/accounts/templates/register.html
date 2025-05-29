@@ -10,13 +10,13 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 offset-md-3">
-                <h2 class="mt-4 mb-4">Register</h2>
+                <h2 class="mt-4 mb-4">Регистрация</h2>
                 <form method="post" class="mb-4">
                     {% csrf_token %}
                     {{ form.as_p }}
                     <button type="submit" class="btn btn-primary">Register</button>
                 </form>
-                <p>Already have an account? <a href="{% url 'login' %}" class="btn btn-link">Login here</a>.</p>
+                <p>Уже есть аккаунт? <a href="{% url 'login' %}" class="btn btn-link">Войти</a>.</p>
             </div>
         </div>
     </div>

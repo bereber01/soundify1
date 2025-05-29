@@ -10,13 +10,9 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from .forms import RegistrationForm, LoginForm
+from django.views.generic import ListView
 
-# @login_required
-# def main_page(request):
-#     albums = models.Album.objects.all()
-#     genres = models.Genre.objects.all()
-#
-#     return render(request, 'home.html', {'albums': albums, 'genres': genres})
+
 
 @login_required
 def profile(request):
@@ -115,3 +111,18 @@ def create_album(request):
 
     genres = Genre.objects.all()
     return render(request, 'createalbum.html', {'genres': genres})
+
+class Search(ListView):
+    template_name = "index.html"
+    paginate_by = 3
+
+
+    def get_queryset(self):
+        return Album.objects.filter(name__icontains=self.request.GET.get("q"))
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context["q"] = f'q={self.request.GET.get("q")}&'
+        context["genres"] = Genre.objects.all()
+        context["is_search"] = True
+        return context
