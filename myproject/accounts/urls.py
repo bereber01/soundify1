@@ -16,7 +16,11 @@ urlpatterns = [
     path('UpdateSong/&lt;int:pk&gt;', UpdateSong, name='UpdateSong'),
     path('AddSong', AddSong, name='AddSong'),
     path('createalbum/', views.create_album, name='create_album'),
-    path('search/', views.Search.as_view(), name='search')
+    path('search/', views.Search.as_view(), name='search'),
+    path('createplaylist/', views.create_playlist, name='create_playlist'),
+    path('playlist/<int:playlist_id>/', views.playlist_detail, name='playlist_detail'),
+    path('playlist/<int:playlist_id>/add/<int:track_id>/', views.add_track_to_playlist, name='add_track_to_playlist'),
+    path('listenplaylist/<int:playlist_id>/', views.listen_playlist, name='listen_playlist')
 ]
 
 if settings.DEBUG:

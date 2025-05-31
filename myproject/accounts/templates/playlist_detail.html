@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ playlist.title }}</title>
+</head>
+<body>
+    <h1>{{ playlist.title }}</h1>
+    {% if playlist.cover %}
+        <img src="{{ playlist.cover.url }}" alt="{{ playlist.title }}" width="200">
+    {% endif %}
+
+    <h2>Add Tracks</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Add Track</button>
+    </form>
+
+    <h3>All Available Tracks:</h3>
+    <ul>
+        {% for track in all_tracks %}
+            <li>
+                {{ track.title }}
+                <a href="{% url 'add_track_to_playlist' playlist_id=playlist.id track_id=track.id %}">Add</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <h2>Playlist Tracks</h2>
+    <ul>
+        {% for track in playlist.tracks.all %}
+            <li>{{ track.title }}</li>
+        {% empty %}
+            <li>No tracks in this playlist yet.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

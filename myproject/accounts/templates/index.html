@@ -12,6 +12,7 @@
     </style>
 </head>
 <body>
+
     <div class="search-bar w3layouts-newsletter">
     <h3 class="sear-head editContent">Поиск альбомов</h3>
     <form action="{% url 'search' %}" method="get" class="d-flex editContent">
@@ -34,6 +35,11 @@
                 {% endfor %}
             </div>
     {% else %}
+        <h1>плейлисты для тебя:</h1>
+        {% for playlist in playlists %}
+                <img src="{{ playlist.cover.url }}" alt="image not found">
+                <h1><a href="{% url 'listen_playlist' playlist.id %}">{{ playlist.name }}</a></h1>
+        {% endfor %}
         {% for genre in genres %}
             <h1>{{ genre.name }} для тебя:</h1>
             {% for album in genre.album_genres.all %}

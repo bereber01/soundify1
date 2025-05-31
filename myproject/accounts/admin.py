@@ -19,3 +19,7 @@ class GenreAdmin(admin.ModelAdmin):
     list_display = ('name',)
 
 admin.site.register(models.CustomUser, UserAdmin)
+
+@admin.register(models.PlayList)
+class PlaylistAdmin(admin.ModelAdmin):
+    list_display = ('title',)

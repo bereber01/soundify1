@@ -54,9 +54,6 @@ class Album(models.Model):
 
 
 class PlayList(models.Model):
-    """ Модель плейлистов пользователя
-    """
-    #user = models.ForeignKey(AuthUser, on_delete=models.CASCADE, related_name='play_lists')
     title = models.CharField(max_length=50)
     tracks = models.ManyToManyField(Track, related_name='track_play_lists')
     cover = models.ImageField(

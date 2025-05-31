@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>create your playlist</title>
+</head>
+<body>
+    <form method="post" class="create-playlist-form">
+    {% csrf_token %}
+    <input placeholder="Name of the playlist..." type="text" name="name-playlist" required>
+    <div class="mb-3">
+      <label for="playlistcover" class="form-label">Cover Image (JPG only):</label>
+      <input type="file" class="form-control" id="playlistcover" name="playlistcover" accept=".jpg" required>
+    </div>
+    <button type="submit">Create</button>
+    </form>
+</body>
+</html>

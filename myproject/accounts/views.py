@@ -3,13 +3,13 @@ from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404
 from . import models
 from rest_framework import generics
-from .models import Track, Genre, Album
+from .models import Track, Genre, Album, PlayList
 from .serializer import TrackSerializer
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
-from .forms import RegistrationForm, LoginForm
+from .forms import RegistrationForm, LoginForm, AddTrackForm
 from django.views.generic import ListView
 
 
@@ -63,9 +63,10 @@ def index(request):
         audio_file = request.FILES.get('audio_file')
         track = Track.objects.create(title=title, audio_file=audio_file)
         return JsonResponse({'status': 'success', 'track_id': track.id})
+    playlists = PlayList.objects.all()
     genres = Genre.objects.all()
     albums = Album.objects.all()
-    return render(request, 'index.html', {'genres': genres, 'albums': albums})
+    return render(request, 'index.html', {'genres': genres, 'albums': albums, 'playlists': playlists})
 
 
 def AddSong(request):
@@ -126,3 +127,42 @@ class Search(ListView):
         context["genres"] = Genre.objects.all()
         context["is_search"] = True
         return context
+
+
+def create_playlist(request):
+    if request.method == "POST":
+        name_playlist = request.POST.get("name-playlist")
+        playlistcover = request.FILES.get("playlistcover")
+
+        create_playlist = PlayList.objects.create(title=name_playlist, cover=playlistcover)
+        return redirect("playlist_detail", playlist_id=create_playlist.id)
+    return render(request, 'create_playlist.html')
+
+
+def playlist_detail(request, playlist_id):
+    playlist = get_object_or_404(PlayList, id=playlist_id)
+
+    if request.method == "POST":
+        form = AddTrackForm(request.POST)
+        if form.is_valid():
+            track = form.cleaned_data['track']
+            playlist.tracks.add(track)
+            return redirect("playlist_detail", playlist_id=playlist_id)
+    else:
+        form = AddTrackForm()
+
+    return render(request, 'playlist_detail.html', {
+        'playlist': playlist,
+        'form': form,
+        'all_tracks': Track.objects.all()
+    })
+
+def add_track_to_playlist(request, playlist_id, track_id):
+    playlist = get_object_or_404(PlayList, id=playlist_id)
+    track = get_object_or_404(Track, id=track_id)
+    playlist.tracks.add(track)
+    return redirect("playlist_detail", playlist_id=playlist_id)
+
+def listen_playlist(render, request, playlist_id):
+    playlist = get_object_or_404(PlayList.objects.prefetch_related('track'), id=playlist_id)
+    return render(request, "listentoplaylist.html", {'playlist': playlist})
