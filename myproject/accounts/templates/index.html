@@ -9,10 +9,13 @@
             width: 200px;
             height: 200px;
         }
+        .right {
+            text-align: right;
+        }
     </style>
 </head>
 <body>
-
+    <a href="profile" class="right">{{ user.username }}</a>
     <div class="search-bar w3layouts-newsletter">
     <h3 class="sear-head editContent">Поиск альбомов</h3>
     <form action="{% url 'search' %}" method="get" class="d-flex editContent">
@@ -22,6 +25,7 @@
         </button>
     </form>
     <h1><a href="createalbum"> Добавить свой альбом </a></h1>
+    <h1><a href="createplaylist">Добавить свой плейлист</a></h1>
     {% if is_search %}
             <h1>Результаты поиска для {{ q }}:</h1>
             <div class="albums-container">
@@ -35,10 +39,11 @@
                 {% endfor %}
             </div>
     {% else %}
+
         <h1>плейлисты для тебя:</h1>
         {% for playlist in playlists %}
                 <img src="{{ playlist.cover.url }}" alt="image not found">
-                <h1><a href="{% url 'listen_playlist' playlist.id %}">{{ playlist.name }}</a></h1>
+                <h1><a href="{% url 'listen_playlist' playlist.id %}">{{ playlist.title }}</a></h1>
         {% endfor %}
         {% for genre in genres %}
             <h1>{{ genre.name }} для тебя:</h1>

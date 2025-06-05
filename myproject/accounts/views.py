@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404
 from . import models
 from rest_framework import generics
-from .models import Track, Genre, Album, PlayList
+from .models import Track, Genre, Album, PlayList, CustomUser
 from .serializer import TrackSerializer
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
@@ -18,11 +18,6 @@ from django.views.generic import ListView
 def profile(request):
     return render(request, 'profile.html')
 
-#def register(request):
-    #return render(request, 'register.html')
-
-#def login(request):
-    #return render(request, 'login.html')
 
 
 
@@ -163,6 +158,6 @@ def add_track_to_playlist(request, playlist_id, track_id):
     playlist.tracks.add(track)
     return redirect("playlist_detail", playlist_id=playlist_id)
 
-def listen_playlist(render, request, playlist_id):
-    playlist = get_object_or_404(PlayList.objects.prefetch_related('track'), id=playlist_id)
+def listen_playlist(request, playlist_id):
+    playlist = get_object_or_404(PlayList.objects.prefetch_related('tracks'), id=playlist_id)
     return render(request, "listentoplaylist.html", {'playlist': playlist})
